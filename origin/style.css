@@ -1,0 +1,219 @@
+@font-face{
+    font-family: Roboto;
+    src: url(RobotoMono-Regular.ttf);
+    font-weight: 400;
+}
+@font-face{
+    font-family: Roboto;
+    src: url(RobotoMono-SemiBold.ttf);
+    font-weight: 600;
+}
+
+
+html, body{
+    margin: 0;
+    padding: 0;
+    background: #333;
+    font-family: Roboto, sans-serif;
+    color: #ddd;
+}
+body{
+    min-height: 200px;
+    overflow: hidden;
+}
+h2, h3{
+    margin: 0 0 10px;
+}
+.hidden{
+    display: none;
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-bottom: 2px solid rgba(220, 220, 220, 0.5);
+}
+.header-task{
+    margin: 0;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.btn{
+    height: 32px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border: 2px solid rgb(220, 220, 220);
+    background: transparent;
+    cursor: pointer;
+    transition: 0.5s;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn:hover{
+    box-shadow: 2px 2px 3px 1px #ddd;
+}
+
+.btn-list{
+    position: relative;
+    width: 45px;
+}
+.btn-list::before,
+.btn-list::after,
+.btn-list span{
+    content:"";
+    width: 15px;
+    height: 2px;
+    background: #ddd;
+    position: absolute;
+    top: calc(50% - 1px);
+    left: 50%;
+}
+.btn-list::before{
+    transform: translate(-50% , -7px);
+}
+.btn-list::after{
+    transform: translate(-50%, 7px);
+}
+.btn-list span{
+    transform: translateX(-50%);
+}
+
+.main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+}
+
+.watch{
+    display: flex;
+    font-size: 40px;
+    line-height: 1;
+}
+.stopWatch{
+    color: #75C471;
+}
+.timer{
+    color: #D2575A;
+}
+
+.actions{
+    margin: 0 10px;
+}
+.actions-btn{
+    width: 45px;
+    margin: 0 2px;
+    position: relative;
+}
+.actions-btn::before,
+.actions-btn::after{
+    background: #ddd;
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 50%;
+}
+.main.go .actions-start,
+.main.pause .actions-pause,
+.main.stop .actions-stop{
+    display: none;
+}
+
+.actions-start::before{
+    display: none;
+}
+.actions-start::after{
+    background: transparent;
+    box-sizing: border-box;
+    border: 8px solid transparent;
+    border-left: 12px solid #ddd;
+    height: 16px;
+    transform: translate(-5px, -50%);
+}
+.actions-pause::before,
+.actions-pause::after{
+    width: 4px;
+    height: 16px;
+}
+.actions-pause::before{
+    transform: translate(-5px, -50%);
+}
+.actions-pause::after{
+    transform: translate(3px, -50%);
+}
+.actions-stop::before{
+    display: none;
+}
+.actions-stop::after{
+    width: 16px;
+    height: 16px;
+    transform: translate(-50%, -50%);
+}
+
+.tasks{
+    border-top: 2px solid rgba(220, 220, 220, .5);
+    padding: 10px 15px;
+}
+.tasks-list{
+    margin: 0;
+    padding: 0 0 0 25px;
+    counter-reset: tasks;
+}
+.tasks-item{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    position: relative;
+}
+.tasks-item::before{
+    counter-increment: tasks;
+    content: ""counter(tasks)".";
+    position: absolute;
+    left: -25px;
+    top: 0;
+    font-size: 18px;
+}
+.tasks-title{
+    margin: 0;
+    color: #fff;
+}
+.tasks-desc{
+    margin: 5px 0 0;
+    width: 100%;
+    line-height: 1;
+}
+
+.modal{
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 20px;
+    color: #000;
+    top: 2px;
+    border: 2px solid #000
+}
+.modal .btn{
+    border-color: #000;
+    color: #000;
+}
+.modal .btn-fill{
+    background: #000;
+    color: #fff;
+}
+.modal .btn:hover{
+    box-shadow: 2px 2px 3px 1px #000;
+}
+.modal-label{
+    display: block;
+    margin-bottom: 10px;
+}
+.modal-field{
+    margin-bottom: 20px;
+}
