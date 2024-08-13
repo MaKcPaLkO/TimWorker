@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TimWorker</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+   
+    <header class="header">
+        <h1 class="header-task" id="taskName">TimWorker</h1>
+        <button id="taskListToggler" class="btn btn-list"><span></span></button>
+    </header>
+    
+    <main class="main" id="main">
+        <div class="stopWatch watch" id="watch-stopWatch">
+            <b>00</b>
+            <span>:</span>
+            <b>00</b>
+        </div>
+        <div class="actions" id="actionsList">
+            <button class="btn actions-btn actions-start" id="startButton"></button>
+            <button class="btn actions-btn actions-pause hidden" id="pauseButton"></button>
+            <button class="btn actions-btn actions-stop hidden" id="stopButton"></button>
+        </div>
+        <div class="timer watch" id="watch-timer">
+            <b>00</b>
+            <span>:</span>
+            <b>00</b>
+        </div>
+    </main>
+    
+    <aside class="tasks" id="tasksSection">
+        <h2>Done</h2>
+        <ol class="tasks-list" id="tasksList"></ol>
+    </aside>
+    
+    <div id="promptName" class="modal hidden">
+        <h3 class="modal-title">Enter task code please</h3>
+        <form action="self" n id="promptNameForm">
+            <input type="text" id="nameField" name="nameField" class="modal-field">
+            <div class="modal-actions">
+                <input type="submit" class="btn btn-fill" value="OK">
+                <button id="cancelName" class="btn modal-cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+    
+    <div id="promptDesc" class="modal hidden">
+        <h3 class="modal-title">Enter description of task please (optional)</h3>
+        <form action="self" id="promptDescForm">
+            <input type="text" id="descField" name="descField" class="modal-field">
+            <div class="modal-actions">
+                <input type="submit" class="btn btn-fill" value="OK">
+                <button onclick="emptyDesc()" class="btn modal-cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>
