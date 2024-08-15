@@ -9,7 +9,7 @@ const Completed = () => {
     const visibleDone = useSelector((state: RootState) => state.tasks.visibleDone)
 
     return (
-        list && visibleDone && (
+        list.length > 0 && visibleDone && (
             <aside className="tasks">
                 <h2>Done</h2>
                 <ol className="tasks-list">
