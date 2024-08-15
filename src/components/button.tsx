@@ -2,12 +2,13 @@ import React from "react";
 
 interface ButtonProps {
     className: string
+    onClick: React.ReactEventHandler
     children?: React.ReactElement | null
 }
 
-const Button = ({className, children=null}:ButtonProps) => {
+const Button = ({className, onClick, children=null}:ButtonProps) => {
     return (
-        <button className={className} >
+        <button className={className} onClick={onClick} >
             {children}
         </button>
     )
