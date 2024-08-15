@@ -1,29 +1,30 @@
-interface TaskProps {
-    name: string
-    time: string
-    description?: string
-}
-interface CompletedProps {
-    list?: TaskProps[]
-}
+import type { RootState } from "../store.ts"
+import { Task as TaskType } from "../feature/types.ts"
+import { useSelector } from "react-redux";
 
-const Completed = ({list}: CompletedProps) => {
+
+const Completed = () => {
+
+    const list = useSelector((state: RootState) => state.tasks.doneTasks)
+    const visibleDone = useSelector((state: RootState) => state.tasks.visibleDone)
 
     return (
-        <aside className="tasks">
-            <h2>Done</h2>
-            <ol className="tasks-list">
-                {
-                    list?.map((item, index) => (
-                        <Task {...item} key={index} />
-                    ))
-                }
-            </ol>
-        </aside>
+        list && visibleDone && (
+            <aside className="tasks">
+                <h2>Done</h2>
+                <ol className="tasks-list">
+                    {
+                        list?.map((item, index) => (
+                            <Task {...item} key={index}/>
+                        ))
+                    }
+                </ol>
+            </aside>
+        )
     )
 }
 
-const Task = ({name, time, description} : TaskProps) => {
+const Task = ({name, time, description}: TaskType) => {
     return (
         <li className="tasks-item">
             <h3 className="tasks-title">{name}</h3>
