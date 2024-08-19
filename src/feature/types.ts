@@ -8,5 +8,6 @@ export interface Task {
 export interface TasksState {
     visibleDone: boolean
     doneTasks: Task[]
+    workStatus: string
     currentTask?: Task
 }
