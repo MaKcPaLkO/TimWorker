@@ -16,7 +16,8 @@ type attributes = {
 
 const Modal = ({type, title, mandatory}: modalProps) => {
 
-    let [value, setValue] = useState("")
+    const [value, setValue] = useState("")
+
 
     const attrs: attributes = {
         name: type,
@@ -25,33 +26,22 @@ const Modal = ({type, title, mandatory}: modalProps) => {
 
     if (mandatory) attrs.required = true
 
-    const dispatch = useDispatch()
-
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement> ) => {
         setValue(event.target.value)
-    }
-
-    const submitHandler = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        if (type === "name") {
-            dispatch(createTask(value))
-        } else if (type === "description") {
-            dispatch(finishTask(value))
-        }
     }
 
     return (
         <div className="modal">
             <h3 className="modal-title">{title}</h3>
-            <form onSubmit={(e) => submitHandler(e)}>
+            <form>
                 <div className="modal-actions">
                     <input
                         type="text"
                         className="modal-field"
+                        onChange={(e) => changeHandler(e)}
                         {...attrs}
                     />
-                    <input type="submit" className="btn btn-fill" value="OK" onChange={(e) => changeHandler(e)} />
+                    <input type="submit" className="btn btn-fill" value="OK" />
                     <button className="btn modal-cancel" >Cancel</button>
                 </div>
             </form>
