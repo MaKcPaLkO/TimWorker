@@ -1,15 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { TasksState} from "./types.ts"
+import { TasksState, Task } from "./types.ts"
 
-import { useId } from "react"
-
+const clearCurrentTask: Task = {
+    id: "",
+    name: "",
+    time: 0
+}
 
 const initialState: TasksState = {
     visibleDone: true,
     doneTasks: [],
     workStatus: "standby",
+    currentTask: clearCurrentTask
 }
+
+
 
 export const tasksSlice = createSlice({
     name: "tasks",
@@ -21,9 +27,6 @@ export const tasksSlice = createSlice({
         updateTaskDescription: (state, action: PayloadAction<string>) => {
             state.currentTask!.description = action.payload
         },
-        pushTask: (state) => {
-            state.doneTasks.push(state.currentTask!)
-        },
         toggleVisibleTasks: (state) => {
             state.visibleDone = !state.visibleDone
         },
@@ -31,9 +34,10 @@ export const tasksSlice = createSlice({
             state.workStatus = "initiation";
         },
         createTask: (state, action: PayloadAction<string>) => {
+            const id = action.payload + (Math.random() * 100).toFixed(0);
             state.workStatus = "work";
             state.currentTask = {
-                id: useId(),
+                id,
                 name: action.payload,
                 time: 0
             }
@@ -41,12 +45,17 @@ export const tasksSlice = createSlice({
         pauseTask: (state) => {
             state.workStatus = "pause";
         },
+        rerunTask: (state) => {
+            state.workStatus = "work";
+        },
         stopTask: (state) => {
             state.workStatus = "stop";
         },
         finishTask: (state, action: PayloadAction<string>) => {
-            state.workStatus = "standby";
+            state.workStatus = "standby"
             state.currentTask!.description = action.payload || ""
+            state.doneTasks.push(state.currentTask!)
+            state.currentTask = clearCurrentTask
         },
     }
 })
@@ -55,9 +64,9 @@ export const {
     createTask,
     updateTaskTime,
     updateTaskDescription,
-    pushTask,
     initTask,
     pauseTask,
+    rerunTask,
     stopTask,
     finishTask,
     toggleVisibleTasks
