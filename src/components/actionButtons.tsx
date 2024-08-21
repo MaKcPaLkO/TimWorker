@@ -1,6 +1,6 @@
 import Button from "./button.tsx";
 import { useSelector, useDispatch } from "react-redux";
-import { initTask, pauseTask, stopTask} from "../feature/tasksSlice.ts";
+import { initTask, pauseTask, stopTask, rerunTask} from "../feature/tasksSlice.ts";
 import { RootState } from "../store.ts"
 
 const ActionButtons = () => {
@@ -8,7 +8,14 @@ const ActionButtons = () => {
     const dispatch = useDispatch();
 
     const startHandler = () => {
-        dispatch(initTask())
+        switch (workStatus) {
+            case "standby":
+                dispatch(initTask());
+                break;
+            case "pause":
+                dispatch(rerunTask());
+                break;
+        }
     }
     const pauseHandler = () => {
         dispatch(pauseTask())
