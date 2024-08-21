@@ -8,14 +8,15 @@ const clearCurrentTask: Task = {
     time: 0
 }
 
+const initialTimer = 8 * 60 * 60
+
 const initialState: TasksState = {
     visibleDone: true,
     doneTasks: [],
     workStatus: "standby",
+    timer: initialTimer,
     currentTask: clearCurrentTask
 }
-
-
 
 export const tasksSlice = createSlice({
     name: "tasks",

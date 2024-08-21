@@ -9,5 +9,6 @@ export interface TasksState {
     visibleDone: boolean
     doneTasks: Task[]
     workStatus: string
+    timer: number
     currentTask?: Task
 }
