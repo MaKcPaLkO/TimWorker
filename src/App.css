@@ -101,6 +101,9 @@ h2, h3{
 .timer{
   color: #D2575A;
 }
+.watch.done {
+  font-size: inherit;
+}
 
 .actions{
   margin: 0 10px;

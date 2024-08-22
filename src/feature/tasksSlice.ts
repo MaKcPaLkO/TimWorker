@@ -8,14 +8,14 @@ const clearCurrentTask: Task = {
     time: 0
 }
 
-const initialTimer = 8 * 60 * 60
+const initialTimer = 8 * 60
 
 const initialState: TasksState = {
     visibleDone: true,
     doneTasks: [],
     workStatus: "standby",
     timer: initialTimer,
-    currentTask: clearCurrentTask
+    currentTask: clearCurrentTask,
 }
 
 export const tasksSlice = createSlice({
@@ -24,9 +24,6 @@ export const tasksSlice = createSlice({
     reducers: {
         updateTaskTime: (state, action: PayloadAction<number>) => {
             state.currentTask!.time = action.payload
-        },
-        updateTaskDescription: (state, action: PayloadAction<string>) => {
-            state.currentTask!.description = action.payload
         },
         toggleVisibleTasks: (state) => {
             state.visibleDone = !state.visibleDone
@@ -64,7 +61,6 @@ export const tasksSlice = createSlice({
 export const {
     createTask,
     updateTaskTime,
-    updateTaskDescription,
     initTask,
     pauseTask,
     rerunTask,
