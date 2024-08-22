@@ -1,7 +1,7 @@
 import type { RootState } from "../store.ts"
 import { Task as TaskType } from "../feature/types.ts"
 import { useSelector } from "react-redux";
-
+import Watch from "../components/watch.tsx"
 
 const Completed = () => {
 
@@ -28,7 +28,9 @@ const Task = ({name, time, description}: TaskType) => {
     return (
         <li className="tasks-item">
             <h3 className="tasks-title">{name}</h3>
-            <span className="tasks-watch">{time}</span>
+            <span className="tasks-watch">
+                <Watch type="done" time={time}/>
+            </span>
             {description && (
                 <p className="tasks-desc">{description}</p>
             )}
