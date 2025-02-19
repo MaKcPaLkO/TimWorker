@@ -25,11 +25,17 @@ const Completed = () => {
 }
 
 const Task = ({name, time, description}: TaskType) => {
+    const timeDate = new Date(time);
+    const hours = timeDate.getHours();
+    const minutes = timeDate.getMinutes();
+
+    const timeData = {hours, minutes};
+
     return (
         <li className="tasks-item">
             <h3 className="tasks-title">{name}</h3>
             <span className="tasks-watch">
-                <Watch type="done" time={time}/>
+                <Watch type="done" time={timeData}/>
             </span>
             {description && (
                 <p className="tasks-desc">{description}</p>

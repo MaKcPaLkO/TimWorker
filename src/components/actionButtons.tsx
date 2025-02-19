@@ -1,27 +1,47 @@
 import Button from "./button.tsx";
 import { useSelector, useDispatch } from "react-redux";
-import { initTask, pauseTask, stopTask, rerunTask} from "../feature/tasksSlice.ts";
+import { initTask, pauseTask, stopTask, resumeTask} from "../feature/tasksSlice.ts";
 import { RootState } from "../store.ts"
+import {StopwatchResult, TimerResult} from "react-timer-hook";
 
-const ActionButtons = () => {
+interface TimeProps {
+    timer: TimerResult
+    stopwatch: StopwatchResult
+}
+
+
+const ActionButtons = ({timer, stopwatch}: TimeProps) => {
     const workStatus = useSelector((state: RootState) => state.tasks.workStatus)
+    const stateTime = useSelector((state: RootState) => state.tasks.currentTask!.time)
     const dispatch = useDispatch();
+
 
     const startHandler = () => {
         switch (workStatus) {
             case "standby":
                 dispatch(initTask());
+                timer.start();
+                stopwatch.start();
                 break;
             case "pause":
-                dispatch(rerunTask());
+                dispatch(resumeTask());
+                const stopwatchOffset = new Date();
+                stopwatchOffset.setSeconds(stopwatchOffset.getSeconds() + stateTime);
+                stopwatch.reset(stopwatchOffset);
+                timer.resume();
                 break;
         }
     }
     const pauseHandler = () => {
-        dispatch(pauseTask())
+        const seconds = stopwatch.totalSeconds
+        timer.pause();
+        stopwatch.pause();
+        dispatch(pauseTask(seconds))
     }
     const stopHandler = () => {
-        dispatch(stopTask())
+        timer.pause();
+        stopwatch.pause();
+        dispatch(stopTask());
     }
 
     return (

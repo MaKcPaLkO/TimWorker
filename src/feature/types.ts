@@ -12,3 +12,8 @@ export interface TasksState {
     timer: number
     currentTask?: Task
 }
+
+export interface Time {
+    hours: number
+    minutes: number
+}
