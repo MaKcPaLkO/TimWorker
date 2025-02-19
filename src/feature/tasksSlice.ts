@@ -40,10 +40,11 @@ export const tasksSlice = createSlice({
                 time: 0
             }
         },
-        pauseTask: (state) => {
+        pauseTask: (state, action: PayloadAction<number>) => {
             state.workStatus = "pause";
+            state.currentTask!.time = action.payload
         },
-        rerunTask: (state) => {
+        resumeTask: (state) => {
             state.workStatus = "work";
         },
         stopTask: (state) => {
@@ -63,7 +64,7 @@ export const {
     updateTaskTime,
     initTask,
     pauseTask,
-    rerunTask,
+    resumeTask,
     stopTask,
     finishTask,
     toggleVisibleTasks
